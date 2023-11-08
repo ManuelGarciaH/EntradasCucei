@@ -249,7 +249,6 @@ export default class CrearCita extends Component {
         //Codigo para enviar y recibir datos del server
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
-          console.log(xhttp.responseText);
           if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             console.log(xhttp.responseText);
@@ -266,9 +265,9 @@ export default class CrearCita extends Component {
           'https://entradascucei.000webhostapp.com/insertarCita.php?nombre=' +
             this.state.nombre +
             '&marcaAuto=' +
-            this.state.apellido +
-            '&placasAuto=' +
             this.state.marcaAuto +
+            '&apellido=' +
+            this.state.apellido +
             '&placasAuto=' +
             this.state.placasAuto +
             '&horaEntrada=' +

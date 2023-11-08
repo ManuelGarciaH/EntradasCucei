@@ -31,17 +31,19 @@ export default class ModificarCita extends Component {
       opcionesFecha: [],
       opcionesHora: [],
       nombre: '',
+      apellido: '',
       marcaAuto: '',
       placasAuto: '',
-      // nombre: this.props.route.params.response.nombre,
-      // marcaAuto: this.props.route.params.response.marcaAuto,
-      // placasAuto: this.props.route.params.response.placaAuto,
+      nombre: this.props.route.params.response.nombre,
+      marcaAuto: this.props.route.params.response.marcaAuto,
+      placasAuto: this.props.route.params.response.placaAuto,
       horaEntrada: '',
       dia: '',
       puerta: '',
       moduloDirigido: '',
 
       nombreError: false,
+      apellidoError: false,
       marcaAutoError: false,
       placasAutoError: false,
       horaEntradaError: false,
@@ -51,8 +53,8 @@ export default class ModificarCita extends Component {
 
       puertaHabilitada: false,
 
-      // id: this.props.route.params.response.id,
-      // response: this.props.route.params.response,
+      id: this.props.route.params.response.id,
+      response: this.props.route.params.response,
     };
     let j = 0;
     for (let i = 65; i <= 90; i++) {
@@ -175,6 +177,7 @@ export default class ModificarCita extends Component {
   render() {
     const {
       nombreError,
+      apellidoError,
       marcaAutoError,
       placasAutoError,
       diaError,
@@ -186,6 +189,7 @@ export default class ModificarCita extends Component {
 
     const modificarCita = () => {
       let nombre = this.state.nombre;
+      let apellido = this.state.apellido;
       let placasAuto = this.state.placasAuto;
       let marcaAuto = this.state.marcaAuto;
       let dia = this.state.dia;
@@ -195,6 +199,7 @@ export default class ModificarCita extends Component {
       _this = this;
       // Validación de campos vacíos
       let nombreError = false;
+      let apellidoError = false;
       let placasAutoError = false;
       let marcaAutoError = false;
       let diaError = false;
@@ -204,6 +209,9 @@ export default class ModificarCita extends Component {
 
       if (nombre === '') {
         nombreError = true;
+      }
+      if (apellido === '') {
+        apellidoError = true;
       }
       if (marcaAuto === '') {
         marcaAutoError = true;
@@ -225,6 +233,7 @@ export default class ModificarCita extends Component {
       }
       this.setState({
         nombreError,
+        apellidoError,
         placasAutoError,
         marcaAutoError,
         diaError,
@@ -240,7 +249,8 @@ export default class ModificarCita extends Component {
         diaError ||
         horaEntradaError ||
         puertaError ||
-        moduloDirigidoError
+        moduloDirigidoError ||
+        apellidoError
       ) {
         Alert.alert('Todos los campos deben estar llenos');
       } else {
@@ -299,17 +309,26 @@ export default class ModificarCita extends Component {
             {/* Formulario Nombre */}
             <Text style={styles.tituloInputFormulario}>Nombre</Text>
             <TextInput
-              // defaultValue={this.props.route.params.response.nombre}
+              defaultValue={this.props.route.params.response.nombre}
               style={[styles.input, nombreError && styles.errorInput]}
               onChangeText={nombre => this.setState({nombre})}></TextInput>
             {nombreError && (
+              <Text style={styles.errorMessage}>Campo requerido</Text>
+            )}
+            {/* Formulario Apellido */}
+            <Text style={styles.tituloInputFormulario}>Apellido</Text>
+            <TextInput
+              defaultValue={this.props.route.params.response.apellido}
+              style={[styles.input, apellidoError && styles.errorInput]}
+              onChangeText={apellido => this.setState({apellido})}></TextInput>
+            {apellidoError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>
             )}
 
             {/* Formulario Marca */}
             <Text style={styles.tituloInputFormulario}>Marca del auto</Text>
             <TextInput
-              // defaultValue={this.props.route.params.response.marcaAuto}
+              defaultValue={this.props.route.params.response.marcaAuto}
               style={[styles.input, marcaAutoError && styles.errorInput]}
               onChangeText={marcaAuto =>
                 this.setState({marcaAuto})
@@ -321,7 +340,7 @@ export default class ModificarCita extends Component {
             {/* Formulario Placas */}
             <Text style={styles.tituloInputFormulario}>Placas del auto</Text>
             <TextInput
-              // defaultValue={this.props.route.params.response.placaAuto}
+              defaultValue={this.props.route.params.response.placaAuto}
               style={[styles.input, placasAutoError && styles.errorInput]}
               onChangeText={placasAuto =>
                 this.setState({placasAuto})
@@ -343,8 +362,8 @@ export default class ModificarCita extends Component {
               />
             </View>
             <Text style={styles.textoAnterior}>
-              Seleccion anterior: {'Nadota'}
-              {/* Seleccion anterior: {this.props.route.params.response.diaEntrada} */}
+              {/* Seleccion anterior: {'Nadota'} */}
+              Seleccion anterior: {this.props.route.params.response.diaEntrada}
             </Text>
             {diaError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>
@@ -367,8 +386,8 @@ export default class ModificarCita extends Component {
               />
             </View>
             <Text style={styles.textoAnterior}>
-              Seleccion anterior: {'Nadota'}
-              {/* Seleccion anterior: {this.props.route.params.response.horaEntrada} */}
+              {/* Seleccion anterior: {'Nadota'} */}
+              Seleccion anterior: {this.props.route.params.response.horaEntrada}
             </Text>
             {horaEntradaError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>
@@ -390,9 +409,9 @@ export default class ModificarCita extends Component {
               />
             </View>
             <Text style={styles.textoAnterior}>
-              Seleccion anterior: {'Nadota'}
-              {/* Seleccion anterior:{' '}
-              {this.props.route.params.response.puertaEntrada} */}
+              {/* Seleccion anterior: {'Nadota'} */}
+              Seleccion anterior:{' '}
+              {this.props.route.params.response.puertaEntrada}
             </Text>
             {puertaError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>
@@ -414,9 +433,9 @@ export default class ModificarCita extends Component {
               />
             </View>
             <Text style={styles.textoAnterior}>
-              Seleccion anterior: {'Nadota'}
-              {/* Seleccion anterior:{' '}
-              {this.props.route.params.response.moduloDirigido} */}
+              {/* Seleccion anterior: {'Nadota'} */}
+              Seleccion anterior:{' '}
+              {this.props.route.params.response.moduloDirigido}
             </Text>
             {moduloDirigidoError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>

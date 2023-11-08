@@ -20,8 +20,8 @@ export default class EliminarCita extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // response: this.props.route.params.response,
-      // id: this.props.route.params.response.id,
+      response: this.props.route.params.response,
+      id: this.props.route.params.response.id,
     };
   }
 
@@ -67,24 +67,24 @@ export default class EliminarCita extends Component {
         <View style={globalStyles.centrar}>
           <View style={[styles.textoContainer, styles.abajo]}>
             <Text style={styles.txtFila}>Fecha: </Text>
-            <Text style={styles.txtDatosBD}>{'00/00/0000'} </Text>
-            {/* <Text style={styles.txtDatosBD}>{this.state.response.diaEntrada} </Text> */}
+            {/* <Text style={styles.txtDatosBD}>{'00/00/0000'} </Text> */}
+            <Text style={styles.txtDatosBD}>{this.state.response.diaEntrada} </Text>
           </View>
 
           <View style={styles.textoContainer}>
             <Text style={styles.txtFila}>Hora: </Text>
-            <Text style={styles.txtDatosBD}>{'00:00'}</Text>
-            {/* <Text style={styles.txtDatosBD}>
+            {/* <Text style={styles.txtDatosBD}>{'00:00'}</Text> */}
+            <Text style={styles.txtDatosBD}>
               {this.state.response.horaEntrada}{' '}
-            </Text> */}
+            </Text>
           </View>
 
           <View style={styles.textoContainer}>
             <Text style={styles.txtFila}>Destino: </Text>
-            <Text style={styles.txtDatosBD}>{'Con diosito'}</Text>
-            {/* <Text style={styles.txtDatosBD}>
+            {/* <Text style={styles.txtDatosBD}>{'Con diosito'}</Text> */}
+            <Text style={styles.txtDatosBD}>
               {this.state.response.moduloDirigido}{' '}
-            </Text> */}
+            </Text>
           </View>
 
           <TouchableOpacity onPress={eliminarCita}>
