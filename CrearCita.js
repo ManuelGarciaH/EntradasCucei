@@ -25,7 +25,7 @@ export default class CrearCita extends Component {
       opcionesPuerta: [
         {key: 0, label: 'Puerta 1 Revolución'},
         {key: 1, label: 'Puerta 2 Olimpica'},
-        {key: 2, label: 'Puerta 3 Bulevar'},
+        {key: 2, label: 'Puerta 3 Boulevar'},
       ],
       opcionesModulo: [],
       opcionesFecha: [],
@@ -34,6 +34,7 @@ export default class CrearCita extends Component {
       apellido: '',
       marcaAuto: '',
       placasAuto: '',
+      color: '',
       horaEntrada: '',
       dia: '',
       puerta: '',
@@ -43,10 +44,13 @@ export default class CrearCita extends Component {
       apellidoError: false,
       marcaAutoError: false,
       placasAutoError: false,
+      colorError: false,
       horaEntradaError: false,
       diaError: false,
       puertaError: false,
       moduloDirigidoError: false,
+
+      errorformatoPlaca: false,
 
       puertaHabilitada: false,
     };
@@ -174,17 +178,27 @@ export default class CrearCita extends Component {
       apellidoError,
       marcaAutoError,
       placasAutoError,
+      colorError,
       diaError,
       horaEntradaError,
       puertaError,
       moduloDirigidoError,
+      errorformatoPlaca,
     } = this.state;
+
+    validarPlacasAuto = () => {
+      const { placasAuto } = this.state;
+      const patronPlacaJalisco = /^[A-Z]{2,3}-\d{2}-\d{2,3}$/;
+  
+      return patronPlacaJalisco.test(placasAuto);
+    };
 
     const CrearCita = () => {
       let nombre = this.state.nombre;
       let apellido = this.state.apellido;
       let placasAuto = this.state.placasAuto;
       let marcaAuto = this.state.marcaAuto;
+      let color = this.state.color;
       let dia = this.state.dia;
       let horaEntrada = this.state.horaEntrada;
       let puerta = this.state.puerta;
@@ -195,10 +209,12 @@ export default class CrearCita extends Component {
       let apellidoError = false;
       let placasAutoError = false;
       let marcaAutoError = false;
+      let colorError = false;
       let diaError = false;
       let horaEntradaError = false;
       let puertaError = false;
       let moduloDirigidoError = false;
+      let errorformatoPlaca = false;
 
       if (nombre === '') {
         nombreError = true;
@@ -211,6 +227,9 @@ export default class CrearCita extends Component {
       }
       if (placasAuto === '') {
         placasAutoError = true;
+      }
+      if (color === '') {
+        colorError = true;
       }
       if (dia === '') {
         diaError = true;
@@ -229,22 +248,29 @@ export default class CrearCita extends Component {
         apellidoError,
         placasAutoError,
         marcaAutoError,
+        colorError,
         diaError,
         horaEntradaError,
         puertaError,
         moduloDirigidoError,
+        errorformatoPlaca,
       });
       if (
         nombreError ||
         apellidoError ||
         placasAutoError ||
         marcaAutoError ||
+        colorError ||
         diaError ||
         horaEntradaError ||
         puertaError ||
         moduloDirigidoError
       ) {
         Alert.alert('Todos los campos deben estar llenos');
+      }else if(!validarPlacasAuto()){
+        Alert.alert('El formato de la placa no es correcto');
+        errorformatoPlaca=true;
+        this.setState({errorformatoPlaca});
       } else {
         //Codigo para enviar y recibir datos del server
         var xhttp = new XMLHttpRequest();
@@ -270,6 +296,8 @@ export default class CrearCita extends Component {
             this.state.apellido +
             '&placasAuto=' +
             this.state.placasAuto +
+            '&color=' +
+            this.state.color +
             '&horaEntrada=' +
             this.state.horaEntrada +
             '&dia=' +
@@ -336,6 +364,18 @@ export default class CrearCita extends Component {
                 this.setState({placasAuto})
               }></TextInput>
             {placasAutoError && (
+              <Text style={styles.errorMessage}>Campo requerido</Text>
+            )}
+            {errorformatoPlaca && (
+              <Text style={styles.errorMessage}>Ingresa un formato valido</Text>
+            )}
+
+            {/* Formulario Color */}
+            <Text style={styles.tituloInputFormulario}>Color</Text>
+            <TextInput
+              style={[styles.input, colorError && styles.errorInput]}
+              onChangeText={color => this.setState({color})}></TextInput>
+            {colorError && (
               <Text style={styles.errorMessage}>Campo requerido</Text>
             )}
 
@@ -438,6 +478,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 15,
     marginBottom: 5,
+    color: "white",
   },
   tituloInputFormulario: {
     fontSize: 24,
@@ -479,6 +520,6 @@ const styles = StyleSheet.create({
   },
   selectTextStyle: {
     fontSize: 20,
-    color: 'black', // Cambia el color aquí para hacerlo más claro
+    color: 'white', // Cambia el color aquí para hacerlo más claro
   },
 });

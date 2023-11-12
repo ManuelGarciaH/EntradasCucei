@@ -67,12 +67,14 @@ export default class Cita extends Component {
               const partes = response.diaEntrada.split("-");
               const diaEntrada = `${partes[2]}/${partes[1]}/${partes[0]}`;
               response.diaEntrada=diaEntrada;
-              console.log(response)
+              _this.setState({ response });
+              _this.props.navigation.navigate('ModificarCita', { response: response });
+            }else{
+              Alert.alert("No se encontro registro")
             }
-            _this.setState({ response });
             _this.setState({ nombre: '' });
             _this.setState({ apellido: '' });
-            _this.props.navigation.navigate('ModificarCita', { response: response });
+            
           }
         };
         xhttp.open("GET", "https://entradascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
@@ -108,7 +110,7 @@ export default class Cita extends Component {
       if (nombreError || apellidoError) {
         Alert.alert("Todos los campos deben estar llenos");
       } else{
-        this.setState({ modalModificar: false });
+        this.setState({modalEliminar:false});
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -263,7 +265,7 @@ export default class Cita extends Component {
 }
 const styles = StyleSheet.create({
   imangeEscudoCucei:{
-    marginTop: 20,
+    marginTop: 60,
     width: wp('55%'),
     height: hp('35%'),
   },
@@ -283,7 +285,7 @@ const styles = StyleSheet.create({
   txtBoton: {
     fontSize: 30,
     textAlign: 'center',
-    color: '#000000',
+    color: 'white',
     fontWeight: 'bold',
     marginLeft: 40,
   },

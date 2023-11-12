@@ -18,7 +18,7 @@ export const globalStyles = StyleSheet.create({
         //flex: 1,
         textAlign: 'center',
         textAlignVertical: 'center',
-        color: '#000000',
+        color: 'white',
         fontWeight: 'bold',
     },
     boton:{

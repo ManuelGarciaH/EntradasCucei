@@ -43,11 +43,7 @@ export default class EliminarCita extends Component {
       };
       xhttp.open(
         'GET',
-        'https://entradascucei.000webhostapp.com/eliminarCita.php?nombre=' +
-          this.state.nombre +
-          '&apellido=' +
-          this.state.apellido,
-        true,
+        'https://entradascucei.000webhostapp.com/eliminarCita.php?id=' + this.state.id, true,
       );
       //xhttp.open("GET", "https://xerophilous-loudspe.000webhostapp.com/datos2.php", true);
       xhttp.send();
