@@ -121,11 +121,12 @@ export default class Cita extends Component {
               const diaEntrada = `${partes[2]}/${partes[1]}/${partes[0]}`;
               response.diaEntrada=diaEntrada;
               console.log(response)
+              _this.props.navigation.navigate('EliminarCita', { response: response });
+            }else{
+              Alert.alert("No se encontro registro")
             }
-            _this.setState({ response });
             _this.setState({ nombre: '' });
             _this.setState({ apellido: '' });
-            _this.props.navigation.navigate('EliminarCita', { response: response });
           }
         };
         xhttp.open("GET", "https://entradascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
