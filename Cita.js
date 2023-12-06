@@ -77,7 +77,7 @@ export default class Cita extends Component {
             
           }
         };
-        xhttp.open("GET", "https://entradascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
+        xhttp.open("GET", "https://puertascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
         //xhttp.open("GET", "https://xerophilous-loudspe.000webhostapp.com/datos2.php", true);
         xhttp.send();
       }
@@ -129,7 +129,7 @@ export default class Cita extends Component {
             _this.setState({ apellido: '' });
           }
         };
-        xhttp.open("GET", "https://entradascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
+        xhttp.open("GET", "https://puertascucei.000webhostapp.com/recuperarCita.php?nombre="+this.state.nombre+"&apellido="+this.state.apellido, true);
         //xhttp.open("GET", "https://xerophilous-loudspe.000webhostapp.com/datos2.php", true);
         xhttp.send();
       }

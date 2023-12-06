@@ -25,7 +25,7 @@ export default class ModificarCita extends Component {
       opcionesPuerta: [
         {key: 0, label: 'Puerta 1 Revolución'},
         {key: 1, label: 'Puerta 2 Olimpica'},
-        {key: 2, label: 'Puerta 3 Boulevar'},
+        {key: 2, label: 'Puerta 3 Boulevard'},
       ],
       opcionesModulo: [],
       opcionesFecha: [],
@@ -248,7 +248,7 @@ export default class ModificarCita extends Component {
         };
         xhttp.open(
           'GET',
-          'https://entradascucei.000webhostapp.com/modificarCita.php?nombre=' +
+          'https://puertascucei.000webhostapp.com/modificarCita.php?nombre=' +
             this.state.nombre +
             '&marcaAuto=' +
             this.state.marcaAuto +
